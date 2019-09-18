@@ -1,19 +1,19 @@
 // Make sure that your app suits this basic spec:
-  
+
 //   * When adding trains, administrators should be able to submit the following:
-    
+
 //     * Train Name
-    
+
 //     * Destination 
-    
+
 //     * First Train Time -- in military time
-    
+
 //     * Frequency -- in minutes
-  
+
 //   * Code this app to calculate when the next train will arrive; this should be relative to the current time.
-  
+
 //   * Users from many different machines must be able to view same train times.
-  
+
 //   * Styling and theme are completely up to you. Get Creative!
 
 //firebase inputs and initialize
@@ -25,26 +25,36 @@ var firebaseConfig = {
     storageBucket: "",
     messagingSenderId: "18087529133",
     appId: "1:18087529133:web:8abac6d2a49579d9be9424"
-  };
-  // Initialize Firebase
+};
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database()
 
 //user form
 
 //on click for add train button
-$("#addTrain").on("click", function(event){
+$("#addTrain").on("click", function (event) {
     event.preventDefault();
     //set vars for each form
-var trainName = $("#name-input").val().trim();
-var destination = $("#destination-input").val().trim();
-var firstTime = $("#first-time-input").val().trim()
-var frequency = $("#frequency-input").val().trim()
-console.log(trainName, destination, firstTime, frequency)
-
-//put vars into temporary object
-//push object to database
-//clear every text box on the page with .val("")
+    var trainName = $("#name-input").val().trim();
+    var destination = $("#destination-input").val().trim();
+    var firstTime = $("#first-time-input").val().trim()
+    var frequency = $("#frequency-input").val().trim()
+    console.log(trainName, destination, firstTime, frequency)
+    //put vars into temporary object
+    var newTrain = {
+        trainName: trainName,
+        destination: destination,
+        firstTime: firstTime,
+        frequency: frequency
+    }
+    //push object to database
+    database.ref().push(newEmp);
+    //clear every text box on the page with .val("")
+    $("#name-input").val("");
+    $("#destination-input").val("");
+    $("#first-time-input").val();
+    $("#frequency-input").val();
 })
 
 //database side
