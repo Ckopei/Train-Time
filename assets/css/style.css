@@ -1,0 +1,13 @@
+.jumbotron {
+    background-image: url("../images/trainBanner.jpeg");
+    background-size: 100% 100%;
+    color: white;
+}
+
+body {
+    background-color: rgb(19, 31, 49);
+}
+
+.table, .card-body {
+    color: white;
+}
