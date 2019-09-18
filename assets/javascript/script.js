@@ -70,7 +70,7 @@ database.ref().on("child_added", function (snapshot) {
 
     // Current Time
     var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+    console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
 
     // Difference between the times
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
@@ -86,7 +86,7 @@ database.ref().on("child_added", function (snapshot) {
 
     // Next Train
     var nextTrain = moment().add(minutesAway, "minutes");
-    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
 
     //append the snapshot variables to the page
     //var for <tr>
@@ -96,7 +96,7 @@ database.ref().on("child_added", function (snapshot) {
         $("<td>").text(destination),
         $("<td>").text(frequency),
         //WHY DOESNT THIS TIME FORMAT WORK WHEN APPENDING BUT IT DOES IN CONSOLE.LOG
-        $("<td>").text(moment(nextTrain).format("hh:mm")),
+        $("<td>").text(moment(nextTrain).format("HH:mm")),
         $("<td>").text(minutesAway),
     );
 
