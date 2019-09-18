@@ -25,7 +25,7 @@ $("#addTrain").on("click", function (event) {
     event.preventDefault();
     //set vars for each form
 
-    if ($("#name-input").val() === "" || $("#destination-input").val() ==="" || $("#first-time-input").val() === "" || $("#frequency-input").val() === "") {
+    if ($("#name-input").val().trim() === "" || $("#destination-input").val().trim() ==="" || $("#first-time-input").val().trim() === "" || $("#frequency-input").val().trim() === "") {
         $(".alert").show()
     }
     else {
