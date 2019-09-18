@@ -24,25 +24,49 @@ var database = firebase.database()
 $("#addTrain").on("click", function (event) {
     event.preventDefault();
     //set vars for each form
-    let trainName = $("#name-input").val().trim();
-    let destination = $("#destination-input").val().trim();
-    let firstTime = $("#first-time-input").val().trim()
-    let frequency = $("#frequency-input").val().trim()
-    console.log(trainName, destination, firstTime, frequency)
-    //put vars into temporary object
-    let newTrain = {
-        trainName: trainName,
-        destination: destination,
-        firstTime: firstTime,
-        frequency: frequency
+
+    if ($("#name-input").val() === "" || $("#destination-input").val() ==="" || $("#first-time-input").val() === "" || $("#frequency-input").val() === "") {
+        //ill be adding the alert to div class="card-body"
+        let div = $("<div>")
+        div.addClass("alert alert-warning alert-dismissible fade show")
+        div.attr("role", "alert")
+        let message = $("<strong>")
+        message.text("Please fill out all of the forms before submitting");
+        let alertBtn = $("<button>")
+        alertBtn.attr("type", "button")
+        alertBtn.addClass("close")
+        alertBtn.attr("data-dismiss", "alert")
+        alertBtn.attr("aria-label", "Close")
+        let s = $("<span>")
+        s.attr("aria-hidden", "true")
+        s.text("&times;")
+
+        alertBtn.append(s);
+        div.append(message);
+        div.append(alertBtn);
+        $("form").append(div);
     }
-    //push object to database
-    database.ref().push(newTrain);
-    //clear every text box on the page with .val("")
-    $("#name-input").val("");
-    $("#destination-input").val("");
-    $("#first-time-input").val("");
-    $("#frequency-input").val("");
+    else {
+        let trainName = $("#name-input").val().trim();
+        let destination = $("#destination-input").val().trim();
+        let firstTime = $("#first-time-input").val().trim()
+        let frequency = $("#frequency-input").val().trim()
+        console.log(trainName, destination, firstTime, frequency)
+        //put vars into temporary object
+        let newTrain = {
+            trainName: trainName,
+            destination: destination,
+            firstTime: firstTime,
+            frequency: frequency
+        }
+        //push object to database
+        database.ref().push(newTrain);
+        //clear every text box on the page with .val("")
+        $("#name-input").val("");
+        $("#destination-input").val("");
+        $("#first-time-input").val("");
+        $("#frequency-input").val("");
+    }
 })
 
 //database side
@@ -95,7 +119,7 @@ database.ref().on("child_added", function (snapshot) {
         $("<td>").text(nextTrain),
         $("<td>").text(minutesAway),
     );
-    
+
     //append new <tr> to the tbody
     $("#appendNewRowHere").append(newRow)
 })
