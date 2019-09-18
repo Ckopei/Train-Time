@@ -36,36 +36,56 @@ var database = firebase.database()
 $("#addTrain").on("click", function (event) {
     event.preventDefault();
     //set vars for each form
-    var trainName = $("#name-input").val().trim();
-    var destination = $("#destination-input").val().trim();
-    var firstTime = $("#first-time-input").val().trim()
-    var frequency = $("#frequency-input").val().trim()
+    let trainName = $("#name-input").val().trim();
+    let destination = $("#destination-input").val().trim();
+    let firstTime = $("#first-time-input").val().trim()
+    let frequency = $("#frequency-input").val().trim()
     console.log(trainName, destination, firstTime, frequency)
     //put vars into temporary object
-    var newTrain = {
+    let newTrain = {
         trainName: trainName,
         destination: destination,
         firstTime: firstTime,
         frequency: frequency
     }
     //push object to database
-    database.ref().push(newEmp);
+    database.ref().push(newTrain);
     //clear every text box on the page with .val("")
     $("#name-input").val("");
     $("#destination-input").val("");
-    $("#first-time-input").val();
-    $("#frequency-input").val();
+    $("#first-time-input").val("");
+    $("#frequency-input").val("");
 })
 
 //database side
-
 //on child added so it calls this every time an entry is made
-//database.ref().on("child_added", function(childSnapshot) {}
-// set variables from the snapshot 
-//console log it so I know it worked
-//append the snapshot variables to the page
-//var for <tr>
-//append all the <tr>'s to it.
-//append new <tr> to the tbody
+database.ref().on("child_added", function (snapshot) {
+    console.log(snapshot.val());
+    // set variables from the snapshot 
+    let trainName = snapshot.val().trainName;
+    let destination = snapshot.val().destination;
+    let firstTime = snapshot.val().firstTime;
+    let frequency = snapshot.val().frequency;
+    //blank var for the next two until i work moment.js into this
+    let nextArrival = ""
+    let minutesAway = ""
+    //console log it so I know it worked
+    console.log(trainName, destination, firstTime, frequency)
+    //append the snapshot variables to the page
+    //var for <tr>
+    var newRow = $("<tr>").append(
+        //append all the <tr>'s to it.
+        $("<td>").text(trainName),
+        $("<td>").text(destination),
+        $("<td>").text(frequency),
+        //once again, ill need to fix these two vars below. appending an empty string currently
+        $("<td>").text(nextArrival),
+        $("<td>").text(minutesAway),
+    );
+    
+    //append new <tr> to the tbody
+    $("#appendNewRowHere").append(newRow)
+})
+
 
 //cry as you figure out how to work in the moment.js math
