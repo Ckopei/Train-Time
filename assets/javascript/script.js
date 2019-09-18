@@ -33,11 +33,19 @@ var database = firebase.database()
 //user form
 
 //on click for add train button
-//set vars for each form
+$("#addTrain").on("click", function(event){
+    event.preventDefault();
+    //set vars for each form
+var trainName = $("#name-input").val().trim();
+var destination = $("#destination-input").val().trim();
+var firstTime = $("#first-time-input").val().trim()
+var frequency = $("#frequency-input").val().trim()
+console.log(trainName, destination, firstTime, frequency)
+
 //put vars into temporary object
 //push object to database
 //clear every text box on the page with .val("")
-
+})
 
 //database side
 
