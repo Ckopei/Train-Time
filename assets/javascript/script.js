@@ -1,15 +1,3 @@
-// Make sure that your app suits this basic spec:
-
-//   * When adding trains, administrators should be able to submit the following:
-
-//     * Train Name
-
-//     * Destination 
-
-//     * First Train Time -- in military time
-
-//     * Frequency -- in minutes
-
 //   * Code this app to calculate when the next train will arrive; this should be relative to the current time.
 
 //   * Users from many different machines must be able to view same train times.
@@ -67,8 +55,33 @@ database.ref().on("child_added", function (snapshot) {
     let firstTime = snapshot.val().firstTime;
     let frequency = snapshot.val().frequency;
     //blank var for the next two until i work moment.js into this
-    let nextArrival = ""
-    let minutesAway = ""
+
+    //moment.js math 
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var minutesAway = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + minutesAway);
+
+    // Next Train
+    var nextTrain = moment().add(minutesAway, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+    //end moment.js math
+
     //console log it so I know it worked
     console.log(trainName, destination, firstTime, frequency)
     //append the snapshot variables to the page
@@ -79,7 +92,7 @@ database.ref().on("child_added", function (snapshot) {
         $("<td>").text(destination),
         $("<td>").text(frequency),
         //once again, ill need to fix these two vars below. appending an empty string currently
-        $("<td>").text(nextArrival),
+        $("<td>").text(nextTrain),
         $("<td>").text(minutesAway),
     );
     
