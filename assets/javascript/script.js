@@ -26,27 +26,10 @@ $("#addTrain").on("click", function (event) {
     //set vars for each form
 
     if ($("#name-input").val() === "" || $("#destination-input").val() ==="" || $("#first-time-input").val() === "" || $("#frequency-input").val() === "") {
-        //ill be adding the alert to div class="card-body"
-        let div = $("<div>")
-        div.addClass("alert alert-warning alert-dismissible fade show")
-        div.attr("role", "alert")
-        let message = $("<strong>")
-        message.text("Please fill out all of the forms before submitting");
-        let alertBtn = $("<button>")
-        alertBtn.attr("type", "button")
-        alertBtn.addClass("close")
-        alertBtn.attr("data-dismiss", "alert")
-        alertBtn.attr("aria-label", "Close")
-        let s = $("<span>")
-        s.attr("aria-hidden", "true")
-        s.text("&times;")
-
-        alertBtn.append(s);
-        div.append(message);
-        div.append(alertBtn);
-        $("form").append(div);
+        $(".alert").show()
     }
     else {
+        $(".alert").hide()
         let trainName = $("#name-input").val().trim();
         let destination = $("#destination-input").val().trim();
         let firstTime = $("#first-time-input").val().trim()
