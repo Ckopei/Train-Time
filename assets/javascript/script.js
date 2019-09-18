@@ -87,10 +87,7 @@ database.ref().on("child_added", function (snapshot) {
     // Next Train
     var nextTrain = moment().add(minutesAway, "minutes");
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-    //end moment.js math
 
-    //console log it so I know it worked
-    console.log(trainName, destination, firstTime, frequency)
     //append the snapshot variables to the page
     //var for <tr>
     var newRow = $("<tr>").append(
@@ -98,14 +95,11 @@ database.ref().on("child_added", function (snapshot) {
         $("<td>").text(trainName),
         $("<td>").text(destination),
         $("<td>").text(frequency),
-        //once again, ill need to fix these two vars below. appending an empty string currently
-        $("<td>").text(nextTrain),
+        //WHY DOESNT THIS TIME FORMAT WORK WHEN APPENDING BUT IT DOES IN CONSOLE.LOG
+        $("<td>").text(moment(nextTrain).format("hh:mm")),
         $("<td>").text(minutesAway),
     );
 
     //append new <tr> to the tbody
     $("#appendNewRowHere").append(newRow)
 })
-
-
-//cry as you figure out how to work in the moment.js math
