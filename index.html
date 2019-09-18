@@ -18,10 +18,11 @@
             <h1 class="display-4">Train Schedules</h1>
             <p class="lead">Add a train to list to see it's departure schedule.</p>
         </div>
-        <!-- Card to display employee data from the database -->
+        <!-- The table i will fill from user input and firebase-->
         <table class="table">
             <thead>
                 <tr>
+                    <!-- headings for my table -->
                     <th scope="col">Train Name</th>
                     <th scope="col">Destination</th>
                     <th scope="col">Frequency (min)</th>
@@ -32,7 +33,7 @@
             <tbody>
             </tbody>
         </table>
-        <!-- Card that contains form to add new train info -->
+        <!-- the form for users to add data to my database -->
         <div class="card mt-4">
             <div class="card-body">
                 <form role="form">
@@ -52,18 +53,21 @@
                         <label for="frequency-input"><strong>Run Frequency (min)</strong></label>
                         <input class="form-control" id="frequency-input" type="text" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="addTrain" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
-
+    <!-- uncompressed jquery cdn because I like to live dangerously -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- LINKS FOR FIREBASE GO HERE -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <!--moment.js cdn-->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <!--My own script needs to go last so these are established before i call them.-->
     <script src="assets/javascript/script.js"></script>
 </body>
 
